@@ -1,0 +1,38 @@
+{
+  "name": "submission",
+  "version": "1.0.0",
+  "description": "Final Submission Ghilman Al Fatih",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config webpack.prod.js",
+    "start-dev": "webpack-dev-server --config webpack.dev.js --open",
+    "http-server": "http-server ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ghilman27/Submission.git"
+  },
+  "author": "Ghilman Al Fatih",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ghilman27/Submission/issues"
+  },
+  "homepage": "https://github.com/ghilman27/Submission#readme",
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.5.3",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "chart.js": "^2.9.3",
+    "regenerator-runtime": "^0.13.5"
+  }
+}
