@@ -1,0 +1,18 @@
+/* to all element */
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* to host (app-bar element) */
+:host {
+    display: block;
+    padding: 1rem;
+    width: 60%;
+    height: 5rem;
+    text-align: center;
+}
+
+img {
+    height: 100%;
+}
