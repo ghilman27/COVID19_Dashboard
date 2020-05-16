@@ -18,11 +18,11 @@ module.exports = {
             {
                 /* component css loader */
                 test: /\.module\.css$/,
-                use: ["css-loader"]
+                use: ["handlebars-loader"]
             },
             {
                 /* component template html */
-                test: /\.module\.hbs$/,
+                test: /\.module\.html$/,
                 use: "handlebars-loader"
             }
         ]

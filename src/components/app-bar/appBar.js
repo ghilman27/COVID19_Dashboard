@@ -1,5 +1,5 @@
 import style from "./appBar.module.css";;
-import template from "./appBar.module.hbs";
+import template from "./appBar.module.html";
 
 const logo = "res/images/logo.svg";
 
@@ -15,7 +15,7 @@ class AppBar extends HTMLElement {
 
     render() {
         const stylesheet = document.createElement("style");;
-        stylesheet.innerHTML = style.toString();;
+        stylesheet.innerHTML = style();;
 
         this.shadowDOM.appendChild(stylesheet);
         this.shadowDOM.innerHTML += template(logo);
