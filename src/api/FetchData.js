@@ -11,21 +11,22 @@ class FetchData {
         try {
             const response = await fetch(`${url}/summary`);
             let {Global : globalData, Countries: allCountriesData , Date} = await response.json();
+            globalData = {Country: "Global", ...globalData, Date: Date};
 
             /* return global summary */
             if (countryName === "Global") {
-                return {...globalData, Date: Date};
+                return globalData;
 
             } else {
                 allCountriesData = allCountriesData.map( ({CountryCode, Slug, ...selectedAttribute}) => ({...selectedAttribute}) );
                 
                 /* return all countries summary */
                 if (countryName === "All") {
-                    return allCountriesData;
+                    return [globalData, ...allCountriesData];
                 }
                 
                 /* return individual country summary */
-                return allCountriesData.filter(data => data.Country === countryName);
+                return allCountriesData.filter(data => data.Country === countryName)[0];
             }
                 
         } catch (error) {
