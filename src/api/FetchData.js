@@ -3,21 +3,15 @@ const url = "https://api.covid19api.com";
 class FetchData {
 
     static async fetchLink(link) {
-        try {
-            const response = await fetch(link);
+        const response = await fetch(link);
 
-            /* alert too many request */
-            if (response.status == "429") {
-                alert(`GET: ${url}/summary Error 429 (Too Many Requests)
-                
-                      Please try again or refresh the page`
-                );
-            } else {
-                return response;
-            }
-            
-        } catch (error) {
-            return error;
+        /* alert too many request */
+        if (response.status == "429") {
+            alert(`GET: ${link} Error 429 (Too Many Requests). Please try again or refresh the page`);
+            throw new Error('Please try again or refresh the page');
+
+        } else {
+            return response;
         }
     }
 
@@ -27,61 +21,47 @@ class FetchData {
         - individual country
     */
     static async getSummaryData(countryName) {
-        try {
-            const response = await FetchData.fetchLink(`${url}/summary`);
-            let {Global : globalData, Countries: allCountriesData , Date} = await response.json();
+        const response = await FetchData.fetchLink(`${url}/summary`);
+        let {Global : globalData, Countries: allCountriesData , Date} = await response.json();
 
-            /* return global summary */
-            if (countryName === "Global") {
-                return {Country: "Global", ...globalData, Date: Date};
+        /* return global summary */
+        if (countryName === "Global") {
+            return {Country: "Global", ...globalData, Date: Date};
 
-            } else {
-                /* return individual country summary */
-                if (countryName !== "All") {
-                    const filtered = allCountriesData.filter(data => data.Country === countryName)[0];
-                    if (filtered) {
-                        const {CountryCode, Slug, ...countryData} = filtered;
-                        return {...countryData};
-                    }
-
-                    alert("No data found in the API, please try different country");
-                    return
+        } else {
+            /* return individual country summary */
+            if (countryName !== "All") {
+                const filtered = allCountriesData.filter(data => data.Country === countryName)[0];
+                if (filtered) {
+                    const {CountryCode, Slug, ...countryData} = filtered;
+                    return {...countryData};
                 }
 
-                /* return all countries summary */
-                allCountriesData = allCountriesData.map( ({CountryCode, Slug, ...selectedAttribute}) => ({...selectedAttribute}) );
-                return [globalData, ...allCountriesData];
+                alert("No data found in the API, please try different country");
+                throw new Error("No data found in the API, please try different country");
             }
-                
-        } catch (error) {
-            return error;
+
+            /* return all countries summary */
+            allCountriesData = allCountriesData.map( ({CountryCode, Slug, ...selectedAttribute}) => ({...selectedAttribute}) );
+            return [globalData, ...allCountriesData];
         }
     }
 
     /* get daily time series data for an individual country from the first case until now */
     static async getDailyData(countryName) {
-        try {
-            const response = await FetchData.fetchLink(`${url}/dayone/country/${countryName}`);
-            const dailyData = await response.json();
-            return dailyData.map( ({Confirmed, Deaths, Recovered, Date}) => ({Confirmed, Deaths, Recovered, Date}) );
+        const response = await FetchData.fetchLink(`${url}/dayone/country/${countryName}`);
+        const dailyData = await response.json();
 
-        } catch (error) {
-            return error;
-        }
+        return dailyData.map( ({Confirmed, Deaths, Recovered, Date}) => ({Confirmed, Deaths, Recovered, Date}) );
     }
 
     /* get array of registered country names */
     static async getCountryNames() {
-        try {
-            const response = await FetchData.fetchLink(`${url}/countries`);
-            let countryNames = await response.json();
-            countryNames = ['Global', ...countryNames.map( ({Country}) => (Country) )];
+        const response = await FetchData.fetchLink(`${url}/countries`);
+        let countryNames = await response.json();
+        countryNames = ['Global', ...countryNames.map( ({Country}) => (Country) )];
 
-            return {"Country": countryNames.sort()};
-
-        } catch (error) {
-            return error;
-        }
+        return {"Country": countryNames.sort()};
     }
 }
 

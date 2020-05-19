@@ -9,7 +9,12 @@ class summaryCard extends HTMLElement {
 
     render(data) {
         /* append bootstrap 4 CSS */
-        this.shadowDOM.innerHTML = `<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">`
+        this.shadowDOM.innerHTML = `
+            <link rel="stylesheet" 
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" 
+            crossorigin="anonymous">
+        `;
         
         /* append CSS stylesheet */
         const stylesheet = document.createElement("style");;
@@ -24,6 +29,24 @@ class summaryCard extends HTMLElement {
             }
         }
         this.shadowDOM.innerHTML += template(data);
+    }
+
+    renderError(message) {
+        this.shadowDOM.innerHTML = "";
+        this.shadowDOM.innerHTML += `
+            <style>             
+                .placeholder {
+                    font-weight: lighter;
+                    color: rgba(0,0,0,0.5);
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                    text-align: center;
+                }
+            </style>
+            <h2 class="placeholder">${message}</h2>
+        `
     }
 }
 
