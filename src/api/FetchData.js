@@ -50,7 +50,12 @@ class FetchData {
     /* get daily time series data for an individual country from the first case until now */
     static async getDailyData(countryName) {
         const response = await FetchData.fetchLink(`${url}/dayone/country/${countryName}`);
-        const dailyData = await response.json();
+        let dailyData = await response.json();
+
+        /* select only to country granularity */
+        if (countryName === 'United States of America') {
+            dailyData = dailyData.filter(eachData => eachData.Province === "");
+        }
 
         return dailyData.map( ({Confirmed, Deaths, Recovered, Date}) => ({Confirmed, Deaths, Recovered, Date}) );
     }
