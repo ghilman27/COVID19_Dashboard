@@ -1,0 +1,8 @@
+* {
+    margin: 0 auto;
+}
+
+:host {
+    display: block;
+    text-align: center;
+}
