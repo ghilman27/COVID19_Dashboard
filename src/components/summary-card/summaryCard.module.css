@@ -5,9 +5,12 @@
 
 :host {
     display: block;
-    width: 70%;
 }
 
 .card-footer {
     font-size: 0.9rem;
+}
+
+.container {
+    margin: 0 auto;
 }
