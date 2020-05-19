@@ -2,14 +2,9 @@ const url = "https://api.covid19api.com";
 
 class FetchData {
 
-    /* get summary data for:
-        - all countries + global: countryName = "All"
-        - global (worldwide): countryName = "Global"
-        - individual country
-    */
-    static async getSummaryData(countryName) {
+    static async fetchLink(link) {
         try {
-            const response = await fetch(`${url}/summary`);
+            const response = await fetch(link);
 
             /* alert too many request */
             if (response.status == "429") {
@@ -17,8 +12,23 @@ class FetchData {
                 
                       Please try again or refresh the page`
                 );
+            } else {
+                return response;
             }
+            
+        } catch (error) {
+            return error;
+        }
+    }
 
+    /* get summary data for:
+        - all countries + global: countryName = "All"
+        - global (worldwide): countryName = "Global"
+        - individual country
+    */
+    static async getSummaryData(countryName) {
+        try {
+            const response = await FetchData.fetchLink(`${url}/summary`);
             let {Global : globalData, Countries: allCountriesData , Date} = await response.json();
 
             /* return global summary */
@@ -51,16 +61,7 @@ class FetchData {
     /* get daily time series data for an individual country from the first case until now */
     static async getDailyData(countryName) {
         try {
-            const response = await fetch(`${url}/dayone/country/${countryName}`);
-
-            /* alert too many request */
-            if (response.status == "429") {
-                alert(`GET: ${url}/summary Error 429 (Too Many Requests)
-                
-                        Please try again or refresh the page`
-                );
-            }
-
+            const response = await FetchData.fetchLink(`${url}/dayone/country/${countryName}`);
             const dailyData = await response.json();
             return dailyData.map( ({Confirmed, Deaths, Recovered, Date}) => ({Confirmed, Deaths, Recovered, Date}) );
 
@@ -72,16 +73,7 @@ class FetchData {
     /* get array of registered country names */
     static async getCountryNames() {
         try {
-            const response = await fetch(`${url}/countries`);
-
-            /* alert too many request */
-            if (response.status == "429") {
-                alert(`GET: ${url}/summary Error 429 (Too Many Requests)
-                
-                        Please try again or refresh the page`
-                );
-            }
-            
+            const response = await FetchData.fetchLink(`${url}/countries`);
             let countryNames = await response.json();
             countryNames = ['Global', ...countryNames.map( ({Country}) => (Country) )];
 
