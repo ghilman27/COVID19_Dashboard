@@ -6,7 +6,7 @@ class summaryCard extends HTMLElement {
     constructor() {
         super();
         this.shadowDOM = this.attachShadow({mode: "open"});
-        this._country = 'Global';
+        this._country = 'Indonesia';
     }
 
     set country(newCountry) {
