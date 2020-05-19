@@ -3,35 +3,48 @@ const url = "https://api.covid19api.com";
 class FetchData {
 
     /* get summary data for:
-        - all countries: countryName = "All"
+        - all countries + global: countryName = "All"
         - global (worldwide): countryName = "Global"
         - individual country
     */
     static async getSummaryData(countryName) {
         try {
             const response = await fetch(`${url}/summary`);
+
+            /* alert too many request */
+            if (response.status == "429") {
+                alert(`GET: ${url}/summary Error 429 (Too Many Requests)
+                
+                      Please try again or refresh the page`
+                );
+            }
+
             let {Global : globalData, Countries: allCountriesData , Date} = await response.json();
-            globalData = {Country: "Global", ...globalData, Date: Date};
 
             /* return global summary */
             if (countryName === "Global") {
-                return globalData;
+                return {Country: "Global", ...globalData, Date: Date};
 
             } else {
-                allCountriesData = allCountriesData.map( ({CountryCode, Slug, ...selectedAttribute}) => ({...selectedAttribute}) );
-                
-                /* return all countries summary */
-                if (countryName === "All") {
-                    return [globalData, ...allCountriesData];
-                }
-                
                 /* return individual country summary */
-                return allCountriesData.filter(data => data.Country === countryName)[0];
+                if (countryName !== "All") {
+                    const filtered = allCountriesData.filter(data => data.Country === countryName)[0];
+                    if (filtered) {
+                        const {CountryCode, Slug, ...countryData} = filtered;
+                        return {...countryData};
+                    }
+
+                    alert("No data found in the API, please try different country");
+                    return
+                }
+
+                /* return all countries summary */
+                allCountriesData = allCountriesData.map( ({CountryCode, Slug, ...selectedAttribute}) => ({...selectedAttribute}) );
+                return [globalData, ...allCountriesData];
             }
                 
         } catch (error) {
             return error;
-
         }
     }
 
@@ -39,8 +52,16 @@ class FetchData {
     static async getDailyData(countryName) {
         try {
             const response = await fetch(`${url}/dayone/country/${countryName}`);
-            const dailyData = await response.json();
 
+            /* alert too many request */
+            if (response.status == "429") {
+                alert(`GET: ${url}/summary Error 429 (Too Many Requests)
+                
+                        Please try again or refresh the page`
+                );
+            }
+
+            const dailyData = await response.json();
             return dailyData.map( ({Confirmed, Deaths, Recovered, Date}) => ({Confirmed, Deaths, Recovered, Date}) );
 
         } catch (error) {
@@ -52,6 +73,15 @@ class FetchData {
     static async getCountryNames() {
         try {
             const response = await fetch(`${url}/countries`);
+
+            /* alert too many request */
+            if (response.status == "429") {
+                alert(`GET: ${url}/summary Error 429 (Too Many Requests)
+                
+                        Please try again or refresh the page`
+                );
+            }
+            
             let countryNames = await response.json();
             countryNames = ['Global', ...countryNames.map( ({Country}) => (Country) )];
 
