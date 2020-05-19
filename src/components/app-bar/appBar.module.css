@@ -16,3 +16,9 @@
 img {
     height: 100%;
 }
+
+@media (max-width: 576px) { 
+    * {
+        width: 100%;
+    }
+}

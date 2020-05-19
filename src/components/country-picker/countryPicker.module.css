@@ -14,3 +14,9 @@
     border-bottom: 0.2rem solid rgba(223, 223, 223, 1);
     text-align: center;
 }
+
+@media (max-width: 576px) { 
+    * {
+        width: 90%;
+    }
+}
