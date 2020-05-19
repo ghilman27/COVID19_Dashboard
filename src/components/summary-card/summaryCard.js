@@ -1,26 +1,10 @@
 import style from "./summaryCard.module.css";
 import template from "./summaryCard.module.html";
-import FetchData from "../../api/FetchData";
 
 class summaryCard extends HTMLElement {
     constructor() {
         super();
         this.shadowDOM = this.attachShadow({mode: "open"});
-        this._country = 'Global';
-    }
-
-    set country(newCountry) {
-        this._country = newCountry;
-        this.getData();
-    }
-
-    connectedCallback() {
-        this.getData();
-    }
-
-    getData() {
-        FetchData.getSummaryData(this._country)
-            .then(data => this.render(data));
     }
 
     render(data) {

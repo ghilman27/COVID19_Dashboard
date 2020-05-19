@@ -53,7 +53,7 @@ class FetchData {
         try {
             const response = await fetch(`${url}/countries`);
             let countryNames = await response.json();
-            countryNames = countryNames.map( ({Country}) => (Country) );
+            countryNames = ['Global', ...countryNames.map( ({Country}) => (Country) )];
 
             return {"Country": countryNames.sort()};
 
