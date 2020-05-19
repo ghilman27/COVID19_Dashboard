@@ -52,9 +52,10 @@ class FetchData {
     static async getCountryNames() {
         try {
             const response = await fetch(`${url}/countries`);
-            const countryNames = await response.json();
+            let countryNames = await response.json();
+            countryNames = countryNames.map( ({Country}) => (Country) );
 
-            return countryNames.map( ({Country}) => ({Country}) )
+            return {"Country": countryNames.sort()};
 
         } catch (error) {
             return error;
