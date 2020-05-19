@@ -4,6 +4,7 @@ const defaultCountry = 'Indonesia';
 const summaryCardElement = document.querySelector("summary-card");
 const countryPickerElement = document.querySelector("country-picker");
 const chartsWrapperElement = document.querySelector("charts-wrapper");
+const tableCasesElement = document.querySelector("table-cases");
 
 /* main navigator JS */
 const main = async () => {
@@ -19,10 +20,12 @@ const initialRender = async () => {
     try {
         /* render country picker */
         countryPickerElement.listCountries = await FetchData.getCountryNames();
-        await countryPickerElement.render(defaultCountry);
+        countryPickerElement.render(defaultCountry);
+
+        tableCasesElement.data = await FetchData.getSummaryData("All");
 
         /* render summary card and charts wrapper */
-        renderPage(defaultCountry)
+        renderPage(defaultCountry);
 
     } catch (error) {
 

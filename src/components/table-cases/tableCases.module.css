@@ -1,0 +1,30 @@
+* {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+:host {
+    display: block;
+}
+
+.container {
+    margin: 3rem auto;
+}
+
+h5 {
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.NewConfirmed {
+    color: rgba(255, 193, 7, 1);
+}
+
+.NewDeaths {
+    color: rgba(255, 0, 0, 1);
+}
+
+.NewRecovered {
+    color: rgba(40, 167, 69, 1);
+}
+

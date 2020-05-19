@@ -47,12 +47,12 @@ class chartsWrapper extends HTMLElement {
                     }, {
                         label: 'Recovered',
                         data: data.map(({Recovered}) => (Recovered)),
-                        backgroundColor: 'rgb(40, 167, 69, 0.5)',
+                        backgroundColor: 'rgba(40, 167, 69, 0.5)',
                         fill: true,
                     }, {
                         label: 'Infected',
                         data: data.map(({Confirmed}) => (Confirmed)),
-                        backgroundColor: 'rgb(255, 193, 7, 0.5)',
+                        backgroundColor: 'rgba(255, 193, 7, 0.5)',
                         fill: true,
                     }]
                 },

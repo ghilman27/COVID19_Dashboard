@@ -1,0 +1,37 @@
+<div class="table-responsive  container">
+
+  <h5>Countries / Regions Affected by Coronavirus (Today)</h5>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Country</th>
+        <th scope="col">Total Cases</th>
+        <th scope="col">New Cases</th>
+        <th scope="col">Total Deaths</th>
+        <th scope="col">New Deaths</th>
+        <th scope="col">Total Recovered</th>
+        <th scope="col">New Recovered</th>
+        <th scope="col">Mortality Rate</th>
+        <th scope="col">Recovery Rate</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each allData}}
+      <tr>
+        <th scope="row">{{Index}}</th>
+        <td>{{Country}}</td>
+        <td>{{TotalConfirmed}}</td>
+        <td class="NewConfirmed">+{{NewConfirmed}}</td>
+        <td>{{TotalDeaths}}</td>
+        <td class="NewDeaths">+{{NewDeaths}}</td>
+        <td>{{TotalRecovered}}</td>
+        <td class="NewRecovered">+{{NewRecovered}}</td>
+        <td>{{MortalityRate}}</td>
+        <td>{{RecoveryRate}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+</table>
+</div>

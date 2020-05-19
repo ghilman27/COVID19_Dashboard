@@ -43,7 +43,7 @@ class FetchData {
 
             /* return all countries summary */
             allCountriesData = allCountriesData.map( ({CountryCode, Slug, ...selectedAttribute}) => ({...selectedAttribute}) );
-            return [globalData, ...allCountriesData];
+            return [{Country: "Global", ...globalData}, ...allCountriesData];
         }
     }
 
