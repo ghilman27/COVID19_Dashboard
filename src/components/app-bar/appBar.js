@@ -1,4 +1,4 @@
-import style from "./appBar.module.css";;
+import style from "./appBar.module.css";
 import template from "./appBar.module.html";
 
 const logo = "res/images/logo.svg";

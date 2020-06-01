@@ -19,8 +19,8 @@ class chartsWrapper extends HTMLElement {
         `;
 
         /* append CSS stylesheet */
-        const stylesheet = document.createElement("style");;
-        stylesheet.innerHTML = style();;
+        const stylesheet = document.createElement("style");
+        stylesheet.innerHTML = style();
         this.shadowDOM.appendChild(stylesheet);
 
         /* append HTML template */
@@ -33,7 +33,7 @@ class chartsWrapper extends HTMLElement {
         if (country !== "Global") {
             data.map((element) => {
                 element["Date"] = new Date(element["Date"]).toDateString();
-            })
+            });
 
             let lineChart = new Chart(myChart, {
                 type: 'line',
@@ -56,7 +56,7 @@ class chartsWrapper extends HTMLElement {
                         fill: true,
                     }]
                 },
-            })
+            });
         }
 
         /* bar chart for global */
@@ -76,12 +76,11 @@ class chartsWrapper extends HTMLElement {
                         fill: true,
                     }]
                 },
-            })
+            });
         }
     }
 
     renderError(message) {
-        this.shadowDOM.innerHTML = "";
         this.shadowDOM.innerHTML += `
             <style>             
                 .placeholder {
@@ -95,7 +94,7 @@ class chartsWrapper extends HTMLElement {
                 }
             </style>
             <h2 class="placeholder">${message}</h2>
-        `
+        `;
     }
 }
 

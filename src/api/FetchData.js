@@ -6,7 +6,7 @@ class FetchData {
         const response = await fetch(link);
 
         /* alert too many request */
-        if (response.status == "429") {
+        if (response.status === "429") {
             alert(`GET: ${link} Error 429 (Too Many Requests). Please try again or refresh the page`);
             throw new Error('Please try again or refresh the page');
 
