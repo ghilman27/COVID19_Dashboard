@@ -1,0 +1,7 @@
+A Covid-19 Dashboard Webpage
+Created using Vanilla JS with Web Components and Shadow DOM
+
+Data source: https://api.covid19api.com
+
+My first webpage with javascript implementation
+be gentle :)
