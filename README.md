@@ -7,3 +7,6 @@ My first webpage with javascript implementation on it,
 
 
 be gentle on me :)
+
+
+for run the app just run `dist/index.html` on your browser
